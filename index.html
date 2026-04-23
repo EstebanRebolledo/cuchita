@@ -99,6 +99,7 @@
       border: 1px solid var(--border);
       color: var(--text);
       background: #fff;
+      cursor: pointer;
     }
 
     .btn.primary {
@@ -115,8 +116,7 @@
       min-height: 360px;
     }
 
-    .hero-photo img,
-    .placeholder {
+    .hero-photo img {
       width: 100%;
       height: 100%;
       min-height: 320px;
@@ -124,16 +124,7 @@
       border-radius: 14px;
       border: 1px dashed #d1d5db;
       background: #fafaf9;
-    }
-
-    .placeholder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      text-align: center;
-      padding: 24px;
-      font-weight: 700;
+      cursor: zoom-in;
     }
 
     main {
@@ -169,11 +160,6 @@
     h2 {
       margin: 0 0 14px;
       font-size: 26px;
-    }
-
-    h3 {
-      margin: 0 0 10px;
-      font-size: 20px;
     }
 
     .info-list {
@@ -220,23 +206,18 @@
       font-weight: 700;
     }
 
-    .maps-wrap {
-      overflow: hidden;
+    .update-box {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      color: #7c2d12;
+      padding: 18px 20px;
       border-radius: 14px;
-      border: 1px solid var(--border);
-      min-height: 320px;
-      background: #fafaf9;
-    }
-
-    .maps-wrap iframe {
-      width: 100%;
-      height: 320px;
-      border: 0;
+      font-size: 16px;
     }
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 16px;
       margin-top: 12px;
     }
@@ -246,19 +227,60 @@
       border-radius: 14px;
       border: 1px solid var(--border);
       background: #fafaf9;
+      cursor: zoom-in;
+      position: relative;
     }
 
     .gallery-item img {
       width: 100%;
-      height: 260px;
+      height: 320px;
       object-fit: cover;
       display: block;
+      transition: transform 0.2s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.02);
+    }
+
+    .route-list {
+      margin: 0;
+      padding-left: 20px;
+      display: grid;
+      gap: 8px;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .map-image-wrap {
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: #fafaf9;
+      cursor: zoom-in;
+    }
+
+    .map-image-wrap img {
+      width: 100%;
+      display: block;
+      max-height: 520px;
+      object-fit: cover;
     }
 
     .small {
       color: var(--muted);
       font-size: 14px;
       margin-top: 10px;
+    }
+
+    .small a {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .small a:hover {
+      text-decoration: underline;
     }
 
     footer {
@@ -268,8 +290,45 @@
       text-align: center;
     }
 
-    @media (max-width: 900px) {
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 9999;
+    }
 
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: min(1200px, 100%);
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+      background: #fff;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
       .hero,
       .grid {
         grid-template-columns: 1fr;
@@ -285,23 +344,31 @@
       .hero-photo {
         min-height: auto;
       }
+
+      .gallery-item img {
+        height: 260px;
+      }
     }
   </style>
+
   <!-- Cloudflare Web Analytics -->
-  <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
     data-cf-beacon='{"token": "9bbd119300b548ecb5f2908b140b0c88"}'></script>
   <!-- End Cloudflare Web Analytics -->
 </head>
+
 <body>
   <header>
     <div class="container hero">
       <section class="card hero-text">
-        <div class="eyebrow">Gata perdida</div>
+        <div class="eyebrow">Gata perdida · búsqueda ampliada</div>
         <h1>Ayúdanos a encontrar a <br />Cuchita</h1>
         <p class="lead">
           Cuchita es una gata de 13 años, de contextura delgada, muy peluda,
-          mayoritariamente blanca con manchas naranjas. Responde a su nombre y
-          su familia la está buscando activamente.
+          mayoritariamente blanca con manchas naranjas. Revisando cámaras del sector,
+          se vio que subió a un vehículo que se fue con ella sin que el conductor se diera cuenta.
+          El conductor ya fue ubicado e indicó que al final del trayecto la gata no estaba en el vehículo,
+          por lo que la búsqueda se amplió a toda la ruta recorrida.
         </p>
 
         <div class="info-list">
@@ -322,13 +389,24 @@
       </section>
 
       <aside class="card hero-photo">
-        <img src="./cuchita.jpeg" alt="Foto de Cuchita" />
+        <img src="./cuchita.jpeg" alt="Foto de Cuchita" class="zoomable" />
       </aside>
     </div>
   </header>
 
   <main>
     <div class="container grid">
+
+      <section class="card section-card span-12">
+        <h2>Actualización importante</h2>
+        <div class="update-box">
+          La búsqueda ya no se limita al último lugar donde fue vista inicialmente.
+          Hoy sabemos que Cuchita pudo haber bajado o escapado en cualquier punto del recorrido
+          realizado por el vehículo. Por eso estamos difundiendo la ruta, realizando publicidad por Meta
+          e instalando carteles físicos en las calles involucradas.
+        </div>
+      </section>
+
       <section class="card section-card span-4">
         <h2>Datos principales</h2>
         <div class="info-list">
@@ -345,8 +423,8 @@
             <div class="value">16:00</div>
           </div>
           <div class="info-item">
-            <span class="label">Último lugar donde se le vio</span>
-            <div class="value">Techo de Palmilla 5431</div>
+            <span class="label">Estado actual de búsqueda</span>
+            <div class="value">Búsqueda ampliada a trayecto completo</div>
           </div>
         </div>
       </section>
@@ -372,44 +450,70 @@
           </div>
           <div class="info-item">
             <span class="label">Importante</span>
-            <div class="value">Es un gato de casa, es primera vez que sale y pasa la noche afuera. Puede estar muy
-              asustada. Si la ves, intenta no perseguirla y comunícate de inmediato.</div>
+            <div class="value">
+              Es una gata de casa, es primera vez que sale y pasa la noche afuera.
+              Puede estar muy asustada y escondida. Si la ves, intenta no perseguirla
+              y comunícate de inmediato.
+            </div>
           </div>
         </div>
       </section>
 
       <section class="card section-card span-6">
+        <h2>Calles del trayecto de búsqueda</h2>
+        <p>
+          Solicitamos ayuda a quienes vivan, trabajen o tengan familiares cerca del trayecto.
+          Por favor difundan esta información y estén atentos si ven un gato que cumpla con
+          las características de Cuchita.
+        </p>
+        <ol class="route-list">
+          <li>Ancud</li>
+          <li>Horacio Jhonson</li>
+          <li>Avenida Principal</li>
+          <li>Guanaco</li>
+          <li>Diego Silva / Alfredo Rosende</li>
+          <li>José Miguel Carrera</li>
+          <li>Av. Zapadores</li>
+          <li>Hernán Mery</li>
+          <li>Pasaje Augusto</li>
+        </ol>
+      </section>
+
+      <section class="card section-card span-6">
+        <h2>Mapa del trayecto</h2>
+        <div class="map-image-wrap">
+          <img src="./mapa_trayecto.jpeg" alt="Mapa del trayecto de búsqueda de Cuchita" class="zoomable" />
+        </div>
+        <p class="small">
+          Este mapa muestra la ruta completa del vehículo en la que pudo haber bajado Cuchita.<br />
+          Revisa el trayecto en Google Maps aquí:
+          <a href="https://maps.app.goo.gl/4ADeKNfHRETpvrWf8" target="_blank" rel="noopener noreferrer">
+            abrir trayecto en Google Maps
+          </a>
+        </p>
+      </section>
+
+      <section class="card section-card span-12">
         <h2>Galería de fotos</h2>
         <div class="gallery">
           <div class="gallery-item">
-            <img src="./cuchita.jpeg" alt="Foto de Cuchita 1" />
+            <img src="./cuchita.jpeg" alt="Foto de Cuchita 1" class="zoomable" />
           </div>
           <div class="gallery-item">
-            <img src="./cuchita_02.jpeg" alt="Foto de Cuchita 2" />
+            <img src="./cuchita_02.jpeg" alt="Foto de Cuchita 2" class="zoomable" />
+          </div>
+          <div class="gallery-item">
+            <img src="./cuchita_03.jpeg" alt="Foto de Cuchita 3" class="zoomable" />
           </div>
         </div>
-        <!-- <p class="small">
-          Puedes agregar más imágenes copiando otro bloque <code>.gallery-item</code> dentro de esta misma galería.
-        </p> -->
-      </section>
-
-      <section class="card section-card span-6">
-        <h2>Ubicación en Google Maps</h2>
-        <div class="maps-wrap">
-          <iframe src="https://www.google.com/maps?q=-33.377722,-70.671111&z=17&output=embed" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade" title="Último lugar donde fue vista"></iframe>
-        </div>
-        <p class="small">
-          Este mapa corresponde al último lugar donde fue vista Cuchita (techo de Palmilla 5431). También puedes abrirlo
-          directamente aquí: https://maps.app.goo.gl/6hD2xqXmNdBFnfBe6
-        </p>
       </section>
 
       <section class="card section-card span-12">
         <h2>Qué hacer si la ves</h2>
         <div class="alert">
-          No la persigas bruscamente. Intenta mantenerla a la vista, toma una foto si puedes y llama o escribe de
-          inmediato al +56 9 6627 5130.
+          Si ves un gato similar a Cuchita en cualquiera de las calles del trayecto,
+          no la persigas bruscamente. Intenta mantenerla a la vista, toma una foto o video si puedes
+          y llama o escribe de inmediato al +56 9 6627 5130.
         </div>
       </section>
     </div>
@@ -418,6 +522,47 @@
   <footer>
     Sitio de apoyo para la búsqueda de Cuchita.
   </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar imagen">×</button>
+    <img id="lightboxImage" src="" alt="Imagen ampliada" />
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const zoomableImages = document.querySelectorAll('.zoomable');
+
+    zoomableImages.forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImage.src = img.src;
+        lightboxImage.alt = img.alt;
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImage.src = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+        closeLightbox();
+      }
+    });
+  </script>
 </body>
 
 </html>
